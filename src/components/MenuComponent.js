@@ -10,83 +10,54 @@ class Menu extends React.Component {
 
         this.state = {
             selectedDish: null
-        }; 
-    };
+        }
+    }
 
     onDishSelect(dish) {
-        this.setState({selectedDish: dish}) 
-    };
+        this.setState({ selectedDish: dish});
+    }
 
     renderDish(dish) {
-        if (dish != null) {
+        if (dish != null)
             return(
                 <Card>
-                    <CardImg width="100%" src={dish.image} alt={dish.name} />
+                    <CardImg top src={dish.image} alt={dish.name} />
                     <CardBody>
-                       <CardTitle>{dish.name}</CardTitle>
-            <CardText>{dish.description}</CardText>
+                      <CardTitle>{dish.name}</CardTitle>
+                      <CardText>{dish.description}</CardText>
                     </CardBody>
                 </Card>
-            )
-        }
-        else {
+            );
+        else
             return(
                 <div></div>
             );
-        }
-    };
-
-    renderComments(dish) {
-        if (dish != null) {
-            return(
-                <div>
-                    <h4>Comments</h4>
-                    {
-                    dish.comments.map((comm) => 
-                          <div key={comm.id}> 
-                              <div>{comm.comment}</div><br></br>
-                              <div>--{comm.author}, {comm.date}</div><br></br>
-                         </div>
-                      )
-                    }
-                    </div>
-             );
-        }
-        else {
-            return(
-                <div></div>
-            );
-        }
-    };
-    
+    }
 
     render() {
-
-        const menu = this.props.dishes.map ((dish) => {
+        const menu = this.props.dishes.map((dish) => {
             return (
-                
-                <div key={dish.id} className="col-12 col-md-5 m-1">
-                    <Card onClick={() => this.onDishSelect(dish)}>
-                    <DishDetail dish={dish} />
-                    </Card>
-                </div>
-                
-            )
+              <div  className="col-12 col-md-5 m-1">
+                <Card key={dish.id}
+                  onClick={() => this.onDishSelect(dish)}>
+                  <CardImg width="100%" src={dish.image} alt={dish.name} />
+                  <CardImgOverlay>
+                      <CardTitle>{dish.name}</CardTitle>
+                  </CardImgOverlay>
+                </Card>
+              </div>
+            );
         });
-        console.log('Menu Components render is invoke');
-        return ( 
+
+        return (
             <div className="container">
                 <div className="row">
-                        {menu}
+                    {menu}
                 </div>
                 <div className="row">
-                    <div className="col-12 col-md-5 m-1">
-                    {this.renderDish(this.state.selectedDish)}
-                    </div>
-                    <div className="col-12 col-md-5 m-1">
-                    {this.renderComments(this.state.selectedDish)}
-                    </div>
-                    
+                  <div  >
+                      <DishDetail dish={this.state.selectedDish} />
+                  </div>
                 </div>
             </div>
         );
