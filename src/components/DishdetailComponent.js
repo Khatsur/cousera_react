@@ -30,7 +30,7 @@ class DishDetail extends React.Component {
                     dish.comments.map((comm) => 
                           <div key={comm.id}> 
                               <div>{comm.comment}</div><br></br>
-                              <div>--{comm.author}, {comm.date}</div><br></br>
+                              <div>--{comm.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comm.date)))}</div><br></br>
                          </div>
                       )}
                     </div>
