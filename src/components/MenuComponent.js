@@ -1,14 +1,12 @@
 import React from 'react';
-import { Form } from 'reactstrap';
 import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap';
-import DishDetail from './DishdetailComponent';
 
 
 
 function RenderMenuItem({dish, onClick}) {
     return (
         <Card key={dish.id}
-                  onClick={() => onClick(dish.id)}>
+                  onClick={ () => onClick(dish.id) }>
                   <CardImg width="100%" src={dish.image} alt={dish.name} />
                   <CardImgOverlay>
                       <CardTitle>{dish.name}</CardTitle>
@@ -38,5 +36,8 @@ const Menu = (props) => {
 
 
 }
+
+
+
        
 export default Menu;
