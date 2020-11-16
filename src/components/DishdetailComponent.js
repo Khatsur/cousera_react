@@ -1,8 +1,14 @@
 import React from 'react';
 import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle, BreadcrumbItem, Breadcrumb } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import {Button, Label, Col, Row } from 'reactstrap';
+import CommentForm  from './CommentForm';
+import FeedbackForm from './CommentForm';
 
-
+function handleClick(e) {
+    e.preventDefault();
+    alert(<CommentForm/>);
+  }
 
    function RenderDish({dish}) {
         if (dish != null)
@@ -32,6 +38,7 @@ import { Link } from 'react-router-dom';
                               <div>-- {comment.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</div><br></br>
                          </div>
                       )}
+                      <CommentForm />
                     </div>
              );}
         else {
