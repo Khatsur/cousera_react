@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Row, Label, Col } from 'reactstrap';
 import { Control, LocalForm, Errors} from 'react-redux-form';
 
+
+
 const CommentForm = (props) => {
-  const {
-    buttonLabel,
-    className
-  } = props;
+  
 
   const [modal, setModal] = useState(false);
 
@@ -17,14 +16,16 @@ const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => val && (val.length >= len);
 
 const handleSubmit = (values) => {
-    console.log('Current State is: ' + JSON.stringify(values));
-    alert('Current State is: ' + JSON.stringify(values));
+  
+   props.addComment(props.dishId, values.rating, values.author, values.comment);
+   
+    
 }
 
   return (
     <div>
       <Button outline onClick={toggle}><span className="fa fa-pencil fa-lg"></span> Submit Comment</Button>
-      <Modal isOpen={modal} toggle={toggle} className={className}>
+      <Modal isOpen={modal} toggle={toggle} >
         <ModalHeader toggle={toggle}>Submit Comment</ModalHeader>
         <ModalBody>
             <div className="col-12 col-md-9">
@@ -65,7 +66,7 @@ const handleSubmit = (values) => {
                     </Row>
                     <Row className="form-group">
                         <Col md={{size: 10, offset: 2}}>
-                            <Button type="submit" color="primary">
+                            <Button type="submit" color="primary" onClick={handleSubmit}>
                                 Submit
                             </Button>
                         </Col>

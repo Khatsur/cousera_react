@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom';
 import {Button, Label, Col, Row } from 'reactstrap';
 import CommentForm  from './CommentForm';
 import FeedbackForm from './CommentForm';
+import { Loading } from './LoadingComponent';
 
 function handleClick(e) {
     e.preventDefault();
     alert(<CommentForm/>);
-  }
+  };
 
    function RenderDish({dish}) {
         if (dish != null)
@@ -27,7 +28,7 @@ function handleClick(e) {
             );
     };
 
-  function  RenderComments({comments}) {
+    function RenderComments({comments, addComment, dishId}) {
         if (comments != null) {
             return(
                 <div>
@@ -35,10 +36,11 @@ function handleClick(e) {
                     {comments.map((comment) => 
                           <div key={comment.id}> 
                               <div>{comment.comment}</div><br></br>
-                              <div>-- {comment.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</div><br></br>
+                              <div>-- {comment.author}</div><br></br>
                          </div>
                       )}
-                      <CommentForm />
+                      <CommentForm dishId={dishId} addComment={addComment}/>
+                      
                     </div>
              );}
         else {
@@ -48,8 +50,26 @@ function handleClick(e) {
     };
 
     const DishDetail = (props) => {
+        if(props.isLoadin) {
+           return(
+                <div className="container">
+                    <div className="row">
+                        <Loading />
+                    </div>
+                </div>
+           );
+        }
+        else if (props.errMess) {
+            return(
+                <div className="container">
+                    <div className="row">
+                       <h4>{props.errMess}</h4>
+                    </div>
+                </div>
+           );
+        }
         
-        if (props.dish !=null) {
+        else if (props.dish !=null) {
 
         return (
           <div className="container">
@@ -69,7 +89,10 @@ function handleClick(e) {
                        <RenderDish dish={props.dish} />
                   </div>
                   <div className="col-12 col-md-5 m-1">
-                        <RenderComments comments={props.comments} />
+                  <RenderComments comments={props.comments}
+                    addComment={props.addComment}
+                    dishId={props.dish.id} />
+                     
                   </div>
             </div>
           </div> 
