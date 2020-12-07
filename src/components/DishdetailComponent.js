@@ -5,6 +5,8 @@ import {Button, Label, Col, Row } from 'reactstrap';
 import CommentForm  from './CommentForm';
 import FeedbackForm from './CommentForm';
 import { Loading } from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
+
 
 function handleClick(e) {
     e.preventDefault();
@@ -15,7 +17,7 @@ function handleClick(e) {
         if (dish != null)
             return(
                 <Card>
-                    <CardImg top src={dish.image} alt={dish.name} />
+                    <CardImg top src={baseUrl + dish.image} alt={dish.name} />
                     <CardBody>
                       <CardTitle>{dish.name}</CardTitle>
                       <CardText>{dish.description}</CardText>
