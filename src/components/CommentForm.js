@@ -4,6 +4,7 @@ import { Control, LocalForm, Errors} from 'react-redux-form';
 
 
 
+
 const CommentForm = (props) => {
   
 
@@ -17,8 +18,8 @@ const minLength = (len) => (val) => val && (val.length >= len);
 
 const handleSubmit = (values) => {
   
-   props.addComment(props.dishId, values.rating, values.author, values.comment);
-   
+   props.postComment(props.dishId, values.rating, values.author, values.comment);
+   alert('Current State is: ' + JSON.stringify(values));
     
 }
 
@@ -66,7 +67,7 @@ const handleSubmit = (values) => {
                     </Row>
                     <Row className="form-group">
                         <Col md={{size: 10, offset: 2}}>
-                            <Button type="submit" color="primary" onClick={handleSubmit}>
+                            <Button type="submit" color="primary" >
                                 Submit
                             </Button>
                         </Col>
